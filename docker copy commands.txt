@@ -1,0 +1,85 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker build -t copybuild:1.0 .
+[+] Building 0.1s (1/2)
+ => [internal] load build definition from Dockerfile                                                                      0.1s 
+ => => transferring dockerfile: 2B                                                                                        0.0s 
+failed to solve with frontend dockerfile.v0: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount479244912/Dockerfile: no such file or directory
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker build -t copybuild:1.0 .
+[+] Building 0.1s (1/2)
+ => [internal] load build definition from Dockerfile                                                                      0.1s 
+ => => transferring dockerfile: 2B                                                                                        0.0s 
+failed to solve with frontend dockerfile.v0: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount019879639/Dockerfile: no such file or directory
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker build -t copybuild:1.0 .
+ => [internal] load build definition from Dockerfile                                                                      0.0s 
+ => => transferring dockerfile: 309B                                                                                      0.0s 
+ => [internal] load .dockerignore                                                                                         0.0s 
+ => => transferring context: 2B                                                                                           0.0s 
+ => [internal] load metadata for docker.io/library/alpine:latest                                                          0.0s 
+ => CACHED [1/6] FROM docker.io/library/alpine:latest                                                                     0.0s 
+ => [internal] load build context                                                                                         0.1s 
+ => => transferring context: 2.95kB                                                                                       0.1s 
+ => ERROR [2/6] RUN apk add --update supervisor mginx && rm -rf /var/cache/apk/*                                          2.0s 
+------
+ > [2/6] RUN apk add --update supervisor mginx && rm -rf /var/cache/apk/*:
+#5 0.560 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+#5 1.254 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+#5 1.943 ERROR: unsatisfiable constraints:
+#5 1.987   mginx (missing):
+#5 1.987     required by: world[mginx]
+------
+executor failed running [/bin/sh -c apk add --update supervisor mginx && rm -rf /var/cache/apk/*]: exit code: 1
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker build -t copybuild:1.0 .
+ => [internal] load build definition from Dockerfile                                                                      0.1s 
+ => => transferring dockerfile: 32B                                                                                       0.0s 
+ => [internal] load .dockerignore                                                                                         0.1s 
+ => => transferring context: 2B                                                                                           0.0s 
+ => [internal] load metadata for docker.io/library/alpine:latest                                                          0.0s 
+ => CACHED [1/6] FROM docker.io/library/alpine:latest                                                                     0.0s 
+ => [internal] load build context                                                                                         0.1s 
+ => => transferring context: 170B                                                                                         0.0s 
+ => ERROR [2/6] RUN apk add --update supervisor mginx && rm -rf /var/cache/apk/*                                          2.6s 
+------
+ > [2/6] RUN apk add --update supervisor mginx && rm -rf /var/cache/apk/*:
+#5 0.519 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/main/x86_64/APKINDEX.tar.gz
+#5 1.476 fetch http://dl-cdn.alpinelinux.org/alpine/v3.12/community/x86_64/APKINDEX.tar.gz
+#5 2.482 ERROR: unsatisfiable constraints:
+#5 2.528   mginx (missing):
+#5 2.528     required by: world[mginx]
+------
+executor failed running [/bin/sh -c apk add --update supervisor mginx && rm -rf /var/cache/apk/*]: exit code: 1
+[+] Building 7.6s (11/11) FINISHED
+ => => transferring dockerfile: 309B                                                                                      0.0s 
+ => [internal] load .dockerignore                                                                                         0.1s 
+ => => transferring context: 2B                                                                                           0.0s 
+ => [internal] load metadata for docker.io/library/alpine:latest                                                          0.0s 
+ => CACHED [1/6] FROM docker.io/library/alpine:latest                                                                     0.0s 
+ => [internal] load build context                                                                                         0.1s 
+ => => transferring context: 170B                                                                                         0.0s 
+ => [2/6] RUN apk add --update supervisor nginx && rm -rf /var/cache/apk/*                                                5.5s 
+ => [3/6] COPY start.sh /script/                                                                                          0.1s 
+ => [4/6] COPY files/default.conf /etc/nginx/conf.d/                                                                      0.1s 
+ => [5/6] COPY files/nginx.conf /etc/nginx/nginx.conf                                                                     0.1s 
+ => [6/6] COPY files/supervisord.conf /etc/supervisord.conf                                                               0.1s 
+ => exporting to image                                                                                                    1.5s 
+ => => exporting layers                                                                                                   1.5s 
+ => => writing image sha256:472b44af2424b5d1f4f4b92beb0f22fe36d0676d41010496a92c92184072ac5e                              0.0s 
+ => => naming to docker.io/library/copybuild:1.0                                                                          0.0s 
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker run -t copybuild:1.0
+/ #
+PS C:\Users\ApoorvaKandikere\Downloads\build_03_copy> docker run -it copybuild:1.0
+/ # ls
+bin     etc     lib     mnt     proc    run     script  sys     usr
+dev     home    media   opt     root    sbin    srv     tmp     var
+/ # cd etc
+/etc # ls
+alpine-release    group-            issue             mtab              passwd-           securetty         supervisord.conf   
+apk               hostname          logrotate.d       network           periodic          services          sysctl.conf        
+conf.d            hosts             modprobe.d        nginx             profile           shadow            sysctl.d
+crontabs          init.d            modules           opt               profile.d         shadow-           terminfo
+fstab             inittab           modules-load.d    os-release        protocols         shells            udhcpd.conf        
+group             inputrc           motd              passwd            resolv.conf       ssl
+/etc #
